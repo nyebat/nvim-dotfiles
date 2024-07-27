@@ -6,4 +6,5 @@ return {
     "clangd",
     "jdtls",
     "lua_ls",
+    -- "bash_ls",
 }
