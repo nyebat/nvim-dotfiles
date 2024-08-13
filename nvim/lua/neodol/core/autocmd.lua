@@ -52,48 +52,21 @@ function BuffRunner()
         },
         --[[ C++ ]]
         cpp = {
-            compile = string.format(
-                "g++ %s -o %s ",
-                get.src, get.dest
-            ),
-            run = string.format(
-                "&& %s ",
-                get.dest
-            ),
-            delTemp = string.format(
-                "&& rm -rf %s",
-                get.dest
-            )
+            compile = string.format("g++ %s -o %s ", get.src, get.dest),
+            run = string.format("&& %s ", get.dest),
+            delTemp = string.format("&& rm -rf %s", get.dest)
         },
         --[[ JAVA ]]
         java = {
-            compile = string.format(
-                "javac %s -d %s ",
-                get.src, get.dest
-            ),
-            run = string.format(
-                "&& cd %s && java %s ",
-                get.dest, get.name
-            ),
-            delTemp = string.format(
-                "&& cd $HOME && rm -rf %s",
-                get.dest
-            ),
+            compile = string.format("javac %s -d %s ", get.src, get.dest),
+            run = string.format("&& cd %s && java %s ", get.dest, get.name),
+            delTemp = string.format("&& cd $HOME && rm -rf %s", get.dest),
         },
         --[[ KOTLIN ]]
         kt = {
-            compile = string.format(
-                "kotlinc %s -include-runtime -d %s.jar ",
-                get.src, get.dest
-            ),
-            run = string.format(
-                "&& java -jar %s.jar ",
-                get.dest
-            ),
-            delTemp = string.format(
-                "&& rm -rf %s.jar",
-                get.dest
-            ),
+            compile = string.format("kotlinc %s -include-runtime -d %s.jar ", get.src, get.dest),
+            run = string.format("&& java -jar %s.jar ", get.dest),
+            delTemp = string.format("&& rm -rf %s.jar", get.dest),
         },
     }
 
@@ -105,7 +78,7 @@ function BuffRunner()
             end
         end
     else
-        print("\n[Err!] this file not setup!\n")
+        print("\n[Err!] this file not setup!\n\nonly support for:\n{sh, fish, cpp, rush, java, kotlin}\n")
         return
     end
 
