@@ -1,10 +1,10 @@
 #!/bin/bash
 
 setup_nvim() {
-    mkdir -p .config
+    [ ! -d ~/.config ] && mkdir -p .config
     git clone https://github.com/nyebat/nvim-dotfiles
-    mv -f  ~/nvim-dotfiles/* .config/
-    rm -rf ~/.config/{.git/,README.md,fish/} nvim-dotfiles
+    mv -f  ~/nvim-dotfiles/. ~/.config/
+    rm -rf ~/.config/{.git/,README.md} ~/Nvim-dotfiles
 }
 
 install_packages() {
