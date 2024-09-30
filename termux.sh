@@ -2,9 +2,9 @@
 
 setup_nvim() {
     [ ! -d ~/.config ] && mkdir -p .config
-    git clone https://github.com/nyebat/nvim-dotfiles
-    mv -f  ~/nvim-dotfiles/. ~/.config/
-    rm -rf ~/.config/{.git/,README.md} ~/Nvim-dotfiles
+    git clone https://github.com/nyebat/nvim-dotfiles ~/dotfiles
+    rm -rfv ~/dotfiles/{.git/,README.md}
+    cp -rv  ~/dotfiles/. ~/ && rm -rf ~/dotfiles
 }
 
 install_packages() {
@@ -33,16 +33,16 @@ setup_termux() {
     # setup termux color scheme
     theme="https://github.com/dracula/termux/archive/master.zip"
     curl -L -o ~/dracula.zip $theme
-    unzip -o ~/dracula.zip
-    mv -f ~/termux-master/colors.properties ~/.termux/colors.properties
+    unzip -ov ~/dracula.zip -d ~/
+    cp -r ~/termux-master/colors.properties ~/.termux/colors.properties
     rm -rf ~/{termux-master,dracula.zip}
 
     # setup termux font
     font="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip"
     curl -L -o ~/font.zip $font
-    unzip -o ~/font.zip
+    unzip -ov ~/font.zip -d ~/
 
-    mv ~/0xProtoNerdFont-Regular.ttf ~/.termux/font.ttf
+    cp -r ~/0xProtoNerdFont-Regular.ttf ~/.termux/font.ttf
     rm ~/{font.zip,*.ttf,README.md,LICENSE}
 
     [ ! -d "$HOME/storage" ] && termux-setup-storage
