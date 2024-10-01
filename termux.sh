@@ -4,7 +4,7 @@ setup_nvim() {
     [ ! -d ~/.config ] && mkdir -p .config
     git clone https://github.com/nyebat/nvim-dotfiles ~/dotfiles
     rm -rfv ~/dotfiles/{.git/,README.md}
-    cp -rv  ~/dotfiles/. ~/ && rm -rf ~/dotfiles
+    cp -rv  ~/dotfiles/. ~/ && rm -rf ~/{dotfiles,termux.sh}
 }
 
 install_packages() {
@@ -43,7 +43,7 @@ setup_termux() {
     unzip -ov ~/font.zip -d ~/
 
     cp -r ~/0xProtoNerdFont-Regular.ttf ~/.termux/font.ttf
-    rm ~/{font.zip,*.ttf,README.md,LICENSE}
+    rm -rf ~/{font.zip,*.ttf,README.md,LICENSE}
 
     [ ! -d "$HOME/storage" ] && termux-setup-storage
 
@@ -60,9 +60,9 @@ set_fish_as_default() {
 }
 
 
+setup_nvim
 install_packages
 setup_termux
-setup_nvim
 set_fish_as_default
 
 echo "Setup dan instalasi selesai!"
