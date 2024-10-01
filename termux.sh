@@ -2,29 +2,35 @@
 
 setup_termux() {
     # setup color scheme
-    theme="https://github.com/dracula/termux/archive/master.zip"
-    curl -L -o ~/dracula.zip $theme
-    unzip -o ~/dracula.zip -d ~/
+    path="https://github.com/dracula/termux/archive/master.zip"
+    theme="dracula"
+
+    curl -L -o ~/${theme}.zip $path
+    unzip -o ~/${theme}.zip -d ~/
     cp -r ~/termux-master/colors.properties ~/.termux/colors.properties
-    rm -rf ~/{termux-master,dracula.zip}
+    rm -rf ~/{termux-master,${theme}.zip}
 
     # setup font
-    font="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip"
-    curl -L -o ~/font.zip $font
-    unzip -o ~/font.zip -d ~/
+    path="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip"
+    font="0xproto"
 
+    curl -L -o ~/${font}.zip $path
+    unzip -o ~/${font}.zip -d ~/
     cp -r ~/0xProtoNerdFont-Regular.ttf ~/.termux/font.ttf
-    rm -rf ~/{font.zip,*.ttf,README.md,LICENSE}
+    rm -rf ~/{${font}.zip,*.ttf,README.md,LICENSE}
 
     [ ! -d "$HOME/storage" ] && termux-setup-storage
+    termux-change-repo
 
 }
 
 setup_nvim() {
     [ ! -d ~/.config ] && mkdir -p .config
-    git clone https://github.com/nyebat/nvim-dotfiles ~/dotfiles
-    rm -rf ~/dotfiles/{.git/,README.md}
-    cp -r  ~/dotfiles/. ~/ && rm -rf ~/{dotfiles,termux.sh}
+    dotfiles="nvim-termux"
+
+    git clone https://github.com/nyebat/nvim-dotfiles ~/${dotfiles}
+    rm -rf ~/${dotfiles}/{.git/,README.md}
+    cp -r  ~/${dotfiles}/. ~/ && rm -rf ~/{${dotfiles},termux.sh}
 }
 
 install_packages() {
